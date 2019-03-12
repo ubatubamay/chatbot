@@ -1,7 +1,8 @@
-'use strict'
+'use strict';
 
-const ExtractPlugin = require('extract-text-webpack-plugin')
-const HTMLPlugin = require('html-webpack-plugin')
+const path = require('path');
+const ExtractPlugin = require('extract-text-webpack-plugin');
+const HTMLPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'eval',
   entry: `${__dirname}/src/main.js`,
@@ -9,6 +10,14 @@ module.exports = {
     filename: 'bundle-[hash].js',
     path: `${__dirname}/build`,
     publicPath: '/',
+  },
+  target: 'web',
+  mode: 'development',
+  devServer: {
+    contentBase: path.resolve(__dirname, 'src'),
+    compress: false,
+    port: 3000,
+    hot: true
   },
   plugins: [
     new HTMLPlugin(),
@@ -25,6 +34,10 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractPlugin.extract(['css-loader', 'sass-loader']),
       },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        use: 'url-loader'
+      }
     ],
   },
-}
+};
