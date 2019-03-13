@@ -11,28 +11,14 @@ const PresentationLayout = props => (
     <div className={`stars large`}></div>
     <div className={`stars medium`}></div>
     <div className={`stars small`}></div>
-    {/* <div classname={`welcome`}>{welcomeText}</div> */}
+    <div className={`presentationTitle`}>Bem-vindo ao Milliways!</div>
+    <div className={`presentationSubTitle`}>O restaurante no fim do unverso</div>
     <Widget/>
   </div>
 );
 
 PresentationLayout.propTypes = {
-  welcomeText: PropTypes.string,
-  title: PropTypes.string,
-  titleAvatar: PropTypes.string,
-  subtitle: PropTypes.string,
-  onSendMessage: PropTypes.func,
-  onToggleConversation: PropTypes.func,
-  showChat: PropTypes.bool,
-  senderPlaceHolder: PropTypes.string,
-  onQuickButtonClicked: PropTypes.func,
-  profileAvatar: PropTypes.string,
-  showCloseButton: PropTypes.bool,
-  disabledInput: PropTypes.bool,
-  fullScreenMode: PropTypes.bool,
-  badge: PropTypes.number,
-  autofocus: PropTypes.bool,
-  customLauncher: PropTypes.func
+  welcomeText: PropTypes.string
 };
 
 export default PresentationLayout;

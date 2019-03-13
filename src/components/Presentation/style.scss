@@ -1,3 +1,13 @@
+.presentationTitle {
+	font-size: 2em;
+	color: #fff;
+}
+
+.presentationSubTitle {
+	font-size: 1.5em;
+	color: #fff;
+}
+
 @function box-shadow($stars) {
 	$bxshadow: ();
 	@for $i from 1 to $stars {

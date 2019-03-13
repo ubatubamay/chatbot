@@ -20,13 +20,10 @@ const Conversation = props =>
       {/* <Loader typing={typing} /> */}...
     </div>
 
-    
-
-
     {/* <QuickButtons onQuickButtonClicked={props.onQuickButtonClicked} /> */}
 
-    <form className="cb-sender" onSubmit="">
-      <input type="text" className="cb-new-message" name="message" placeholder="Escreva aqui" disabled={false} autoFocus="false" autoComplete="off"/>
+    <form className="cb-sender" onSubmit={props.sendMessage}>
+      <input type="text" className="cb-new-message" name="message" placeholder="Escreva aqui" disabled={false} autoFocus={false} autoComplete="off"/>
       <button type="submit" className="cb-send">
         <img src={send} className="cb-send-icon" alt="send" />
       </button>

@@ -8,7 +8,7 @@ import './style.scss';
 const WidgetLayout = props => (
     <div className={`cb-widget-container`}>
         {props.oppenedConversation &&
-            <Conversation/>
+            <Conversation sendMessage={props.onSendMessage} messages={props.messages}/>
         }        
         <Launcher onClick={() => props.onClick()} oppenedConversation = {props.oppenedConversation}/>
     </div>
