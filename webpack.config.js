@@ -16,7 +16,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'src'),
     compress: false,
-    port: 3000,
+    port: 8080,
     hot: true
   },
   plugins: [
