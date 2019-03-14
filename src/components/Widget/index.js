@@ -31,6 +31,7 @@ class Widget extends React.Component {
             <Widgetlayout 
                 onClick={() => this.toggleConversation()}
                 oppenedConversation = {this.state.oppenedConversation}
+                socket={this.props.socket}
             />
         );
     }

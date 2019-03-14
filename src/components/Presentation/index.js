@@ -4,14 +4,16 @@ import PresentationLayout from './layout';
 
 class Presentation extends React.Component {
 
-    // Props
+    constructor(props) {
+        super(props);
+    }
 
     // Functions
 
     // HTML
     render() {
         return (
-          <PresentationLayout/>
+          <PresentationLayout socket={this.props.socket}/>
         );
     }
 }

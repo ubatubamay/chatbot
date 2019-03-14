@@ -6,14 +6,20 @@ import Launcher from './Launcher';
 import './style.scss';
 
 class WidgetLayout extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         const { onClick, oppenedConversation} = this.props;
         return (
             <div className={`cb-widget-container`}>
                 {oppenedConversation &&
-                    <Conversation/>
+                    <Conversation socket={this.props.socket}/>
                 }        
-                <Launcher onClick={() => onClick()} oppenedConversation = {oppenedConversation}/>
+                <Launcher 
+                    onClick={() => onClick()} 
+                    oppenedConversation = {oppenedConversation}
+                />
             </div>
         );
     }
