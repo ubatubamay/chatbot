@@ -11,6 +11,7 @@ class Structure extends React.Component {
         super(props);
         this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
         this.callOldMessages = this.callOldMessages.bind(this);
+        this.storeNewUserMessage = this.storeNewUserMessage.bind(this);
         this.state = {
             messages: Array(),
             endpoint: "localhost:4001",
@@ -41,34 +42,42 @@ class Structure extends React.Component {
     }
 
     storeNewUserMessage(component, userInput) {
+        const message = {
+            text: userInput,
+            senderName: this.props.userName,
+            userId: this.state.socketUserID
+        };
+
         if (this.state.file){
-            axios.post('http://localhost:4001/api/image/', {
-                file: this.state.file
+            let formData = new FormData();
+            formData.append('file', this.state.file);
+
+            axios({
+                url: 'http://localhost:4001/api/image/',
+                method: 'POST',
+                data: formData
             })
             .then(function (response) {
-                console.log(response);
-                // component.props.socket.emit('send-public-message', message);
-                // const copyMessages = Object.assign([], component.state.messages);
-                // copyMessages.push(message);
-                // component.setState({messages:copyMessages});
-                // return message;
+                message.file = response.data.filename;
+                axios.post('http://localhost:4001/api/message/', {
+                    message: message
+                })
+                .then(function (response) {
+                    component.props.socket.emit('send-public-message', message);
+                    const copyMessages = Object.assign([], component.state.messages);
+                    copyMessages.push(message);
+                    component.setState({messages:copyMessages});
+                    return message;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             })
-            .catch(function (error) {
+            .catch(function (error){
                 console.log(error);
             });
             this.setState({file:null});
-        }else {
-            const message = {
-                text: userInput,
-                senderName: this.props.userName,
-                userId: this.state.socketUserID
-            };
-            if (this.state.file){
-                console.log(this.state.file);
-                message.file = this.state.file;
-                console.log(message.file);
-            }
-    
+        } else {
             axios.post('http://localhost:4001/api/message/', {
                 message: message
             })
@@ -83,6 +92,7 @@ class Structure extends React.Component {
                 console.log(error);
             });
         }
+        
     }
 
     handleMessageSubmit (event) {
@@ -103,9 +113,8 @@ class Structure extends React.Component {
         }
     }
 
-    onChooseFile(e) {
-        let files = e.target.files;        
-        this.setState({file:files[0]});
+    onChooseFile(e) {      
+        this.setState({ file: e.target.files[0] });
     }
 
     render() { 
@@ -137,7 +146,7 @@ class Structure extends React.Component {
                         <form onSubmit={this.handleMessageSubmit}>
                             <textarea name="message" id="message-to-send" placeholder ="Type your message" rows="1"></textarea>
                                 
-                            <input type="file" name="file" onChange={(e)=>this.onChooseFile(e)}></input>
+                            <input type="file" name="file" encType="multipart/form-data" onChange={(e)=>this.onChooseFile(e)}></input>
                         
                             <button type="submit">Send</button>
                         </form>

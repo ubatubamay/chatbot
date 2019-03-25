@@ -11,6 +11,13 @@ const Message = (props) => {
             </div>
             <div className={isMine ? 'message other-message float-right' : 'message my-message'}>
                 {props.message.text}
+                {props.message.file && 
+                    <span>
+                        <br/>
+                        <img src={`http://localhost:4001/api/image/${props.message.file}`}/>
+                    </span>
+                    
+                }
             </div>
         </li>
     );
