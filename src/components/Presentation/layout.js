@@ -11,8 +11,8 @@ const PresentationLayout = props => (
     <div className={`stars large`}></div>
     <div className={`stars medium`}></div>
     <div className={`stars small`}></div>
-    <div className={`presentationTitle`}>Bem-vindo ao Milliways!</div>
-    <div className={`presentationSubTitle`}>O restaurante no fim do unverso</div>
+    {/* <div className={`presentationTitle`}>Bem-vindo ao Milliways!</div>
+    <div className={`presentationSubTitle`}>O restaurante no fim do unverso</div> */}
     <Widget socket={props.socket}/>
   </div>
 );

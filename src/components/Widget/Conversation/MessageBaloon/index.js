@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-const Message = (props) => {
+const MessageBaloon = (props) => {
     return (
         <div className="cb-message" key={1}>
             <div className={`cb-${props.sender}`}>
@@ -13,4 +13,4 @@ const Message = (props) => {
     );
 };
 
-export default Message;
+export default MessageBaloon;

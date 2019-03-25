@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+$gray: #92959E;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.chat-header {
+    padding: 20px;
+    border-bottom: 2px solid white;
+    
+    .chat-about {
+        float: left;
+        padding-left: 10px;
+        margin-top: 6px;
+    }
+    
+    .chat-with {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    .chat-num-messages {
+        color: $gray;
+    }
+}

@@ -1,13 +1,3 @@
-.presentationTitle {
-	font-size: 2em;
-	color: #fff;
-}
-
-.presentationSubTitle {
-	font-size: 1.5em;
-	color: #fff;
-}
-
 @function box-shadow($stars) {
 	$bxshadow: ();
 	@for $i from 1 to $stars {
@@ -19,6 +9,13 @@
 $bxshadow-large: box-shadow(300);
 $bxshadow-medium: box-shadow(500);
 $bxshadow-small: box-shadow(800);
+
+.chatpage {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 
 .stars.large {
 	height: 3px;

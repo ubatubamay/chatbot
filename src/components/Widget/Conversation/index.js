@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import send from '../../../assets/img/send_button.svg';
-import Message from './Message/';
+import MessageBaloon from './MessageBaloon/';
 import { setTimeout } from 'timers';
 import socketIOClient from "socket.io-client";
 
@@ -121,7 +121,7 @@ class Conversation extends Component {
 
         <div id="messages" className="cb-messages-container" ref={msg => this.$messageRef = msg}>
             {this.state.messages.map((message, index)=>{
-                return (<Message key={index} sender={message.sender} text={message.text}/>);
+                return (<MessageBaloon key={index} sender={message.sender} text={message.text}/>);
             })}
             <div className={`loader ${this.state.botIsTyping && 'active'}`}>
               <div className="loader-container">

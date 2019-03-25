@@ -1,0 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+  
+.chat-history {
+    padding: 30px 30px 20px;
+    border-bottom: 2px solid white;
+    overflow-y: scroll;
+    height: 608px;
+}
