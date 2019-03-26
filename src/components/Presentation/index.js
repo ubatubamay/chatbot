@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import PresentationLayout from './layout';
 import Structure from '../Structure';
 import Login from '../Login';
 

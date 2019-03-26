@@ -11,12 +11,20 @@ const Message = (props) => {
             </div>
             <div className={isMine ? 'message other-message float-right' : 'message my-message'}>
                 {props.message.text}
-                {props.message.file && 
+                {props.message.file &&
                     <span>
                         <br/>
-                        <img src={`http://localhost:4001/api/image/${props.message.file}`}/>
+                        {props.message.file.mimetype.indexOf('image',0) == 0 ?
+                            <img 
+                                className="message-image" 
+                                src={`http://localhost:4001/api/image/${props.message.file.filename}/${props.message.file.size}/${props.message.file.mimetype}`}
+                            /> 
+                        :   
+                            <a href={`http://localhost:4001/api/image/${props.message.file.filename}/${props.message.file.size}/${props.message.file.mimetype}`}>
+                                {props.message.file.originalname}
+                            </a>
+                        }
                     </span>
-                    
                 }
             </div>
         </li>

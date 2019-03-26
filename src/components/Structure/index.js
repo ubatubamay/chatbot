@@ -12,6 +12,7 @@ class Structure extends React.Component {
         this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
         this.callOldMessages = this.callOldMessages.bind(this);
         this.storeNewUserMessage = this.storeNewUserMessage.bind(this);
+        this.saveMessageOnServer = this.saveMessageOnServer.bind(this);
         this.state = {
             messages: Array(),
             endpoint: "localhost:4001",
@@ -58,47 +59,40 @@ class Structure extends React.Component {
                 data: formData
             })
             .then(function (response) {
-                message.file = response.data.filename;
-                axios.post('http://localhost:4001/api/message/', {
-                    message: message
-                })
-                .then(function (response) {
-                    component.props.socket.emit('send-public-message', message);
-                    const copyMessages = Object.assign([], component.state.messages);
-                    copyMessages.push(message);
-                    component.setState({messages:copyMessages});
-                    return message;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                console.log(response);
+                message.file = response.data;
+                component.saveMessageOnServer(component, message);
+                component.setState({file:null});
             })
             .catch(function (error){
                 console.log(error);
             });
-            this.setState({file:null});
         } else {
-            axios.post('http://localhost:4001/api/message/', {
-                message: message
-            })
-            .then(function (response) {
-                component.props.socket.emit('send-public-message', message);
-                const copyMessages = Object.assign([], component.state.messages);
-                copyMessages.push(message);
-                component.setState({messages:copyMessages});
-                return message;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            this.saveMessageOnServer(this, message);
         }
         
+    }
+
+    saveMessageOnServer(component, message) {
+        axios.post('http://localhost:4001/api/message/', {
+            message: message
+        })
+        .then(function (response) {
+            component.props.socket.emit('send-public-message', message);
+            const copyMessages = Object.assign([], component.state.messages);
+            copyMessages.push(message);
+            component.setState({messages:copyMessages});
+            return message;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     handleMessageSubmit (event) {
         event.preventDefault();
         const messageInput = event.target.message.value;
-        if (messageInput.trim()) {
+        if (messageInput.trim() || this.state.file) {
             this.storeNewUserMessage(this, messageInput);
         }
         event.target.message.value = '';
@@ -147,8 +141,11 @@ class Structure extends React.Component {
                             <textarea name="message" id="message-to-send" placeholder ="Type your message" rows="1"></textarea>
                                 
                             <input type="file" name="file" encType="multipart/form-data" onChange={(e)=>this.onChooseFile(e)}></input>
-                        
-                            <button type="submit">Send</button>
+
+                            <button type="submit">
+                                <i className="fas fa-paper-plane"> SEND</i>
+                            </button>
+                            
                         </form>
                     </div>
                 
