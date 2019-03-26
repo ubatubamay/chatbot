@@ -76,7 +76,7 @@ class Login extends React.Component {
             <div className={containerClass.join(' ')}>
                 <div className={loginClass.join(' ')}>
                     <h1>Enter your @</h1>
-                    <form onSubmit={this.submitLogin}>
+                    <form onSubmit={this.submitLogin} name="user">
                         <input type="text" name="userName" placeholder="e.g. realfetter"></input>
                         <button type="submit" className="btn btn--primary btn--inside uppercase">Enter</button>
                     </form>

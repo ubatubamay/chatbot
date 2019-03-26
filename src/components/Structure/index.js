@@ -62,7 +62,7 @@ class Structure extends React.Component {
                 console.log(response);
                 message.file = response.data;
                 component.saveMessageOnServer(component, message);
-                component.setState({file:null});
+                //component.setState({file:null});
             })
             .catch(function (error){
                 console.log(error);
@@ -142,7 +142,7 @@ class Structure extends React.Component {
                                 
                             <input type="file" name="file" encType="multipart/form-data" onChange={(e)=>this.onChooseFile(e)}></input>
 
-                            <button type="submit">
+                            <button type="submit" name="btn-send">
                                 <i className="fas fa-paper-plane"> SEND</i>
                             </button>
                             
