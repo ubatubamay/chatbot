@@ -1,7 +1,9 @@
 import React from 'react';
+import axios from 'axios';
+
 import './style.scss';
 
-import axios from 'axios';
+import ChatPeopleList from './ChatPeopleList';
 import ChatHistory from './ChatHistory';
 import ChatHeader from './ChatHeader';
 
@@ -54,7 +56,7 @@ class Structure extends React.Component {
             .then(function (response) {
                 console.log(response);
                 message.file = response.data;
-                component.saveMessageOnServer(component, message);
+                component.saveMessageOnServer(message);
                 component.setState({file:null});
             })
             .catch(function (error){
@@ -85,20 +87,7 @@ class Structure extends React.Component {
         return (
         <div>
             <div className="container-chat clearfix">
-                <div className="people-list" id="people-list">
-                    <div className="search">
-                        Logged as {this.props.userName}
-                    </div>
-                    <ul className="list">
-                        <li className="clearfix">
-                            <div className="about">
-                                <div className="name">Public chat room</div>
-                                <div className="status">
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <ChatPeopleList closeSession={this.props.handleLogout} userName={this.props.userName}/>
                 
                 <div className="chat">
                 
@@ -113,8 +102,7 @@ class Structure extends React.Component {
 
                             <button type="submit" name="btn-send">
                                 <i className="fas fa-paper-plane"> SEND</i>
-                            </button>
-                            
+                            </button>                            
                         </form>
                     </div>
                 

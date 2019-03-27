@@ -1,0 +1,59 @@
+$green: #86BB71;
+$blue: #0066cc;
+$orange: #e65c00;
+$gray: #92959E;
+$red: #b30000;
+$silver: #F2F5F8;
+
+.people-list {
+    width:20%;
+    float: left;
+    
+    .user-account {
+        padding: 20px;
+        background-color: $orange;
+        color: $silver;
+        font-size: 1.3em;
+        border-radius: 5px 0 0 0;
+
+        .fa-user-alt {
+            padding: 1px 6px;
+        }
+
+        .user-control {
+            margin-top: 5px;
+            display: block;
+
+            button {
+                font-size: 1em;
+                color: lighten($orange, 40%);
+                border: none;
+                cursor: pointer;
+                background: $orange;
+                &:hover {
+                    color: darken($silver, 7%);
+                }                
+            }
+        }
+    }
+    
+    ul {
+        padding: 0 20px 20px 20px;
+        
+        li {
+            padding-bottom: 20px;
+            margin: 1em 0 1em 0;
+            border-left: solid 2px $orange;
+        
+            .about {
+                float: left;
+                margin-top: 8px;
+                padding-left: 8px;
+
+                .room-name {
+                    color: $silver;
+                }
+            }
+        }
+    }  
+}

@@ -13,6 +13,11 @@ class Presentation extends React.Component {
             isLogged: false,
             userName: null
         };
+        
+    }
+
+    componentDidMount() {
+        this.checkLoggin();
     }
 
     checkLoggin() {
@@ -29,20 +34,17 @@ class Presentation extends React.Component {
     }
 
     handleLogout(){
+        sessionStorage.removeItem("isLoggedIn");
         this.setState({
             isLogged: false
         });
-    }
-
-    componentWillMount() {
-        this.checkLoggin();
     }
 
     render() {
         return (
             <div className="chatpage">
                 {this.state.isLogged ? (
-                    <Structure userName={this.state.userName} socket={this.props.socket}/>
+                    <Structure userName={this.state.userName} handleLogout={this.handleLogout} socket={this.props.socket}/>
                 ) : (
                     <Login handleLogin={this.handleLogin} socket={this.props.socket}/>
                 )}

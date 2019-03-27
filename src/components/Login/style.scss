@@ -1,10 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 
 $green: #86BB71;
-$blue: #94C2ED;
-$orange: #E38968;
+$blue: #0066cc;
+$orange: #e65c00;
 $gray: #92959E;
-
+$red: #b30000;
+$silver: #F2F5F8;
 
 .container {
   margin: 0 auto;
@@ -61,14 +62,14 @@ $gray: #92959E;
         cursor: pointer;
         
         &--primary {
-            background: #00688B;
+            background: $orange;
             color: #fff;
             box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
             border-radius: 2px;
             padding: 12px 36px;
             
             &:hover {
-                background: darken(#00688B, 4%);
+                background: darken($orange, 4%);
             }
             
             &:active {

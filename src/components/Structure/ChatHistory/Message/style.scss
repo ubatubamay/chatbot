@@ -1,13 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 
 $green: #86BB71;
-$blue: #94C2ED;
-$orange: #E38968;
+$blue: #0066cc;
+$orange: #e65c00;
 $gray: #92959E;
+$red: #b30000;
+$silver: #F2F5F8;
 
-.message {      
+.message {
     color: white;
-    padding: 18px 20px;
+    padding: 8px 20px;
     line-height: 26px;
     font-size: 16px;
     border-radius: 7px;
@@ -15,6 +17,10 @@ $gray: #92959E;
     min-width: 5px;
     max-width: 90%;
     position: relative;
+
+    a {
+        color:#444753;
+    }
 }
 
 .message-data {
@@ -27,18 +33,18 @@ $gray: #92959E;
 }
 
 .other-message {
-    background: $green;
+    background: $gray;
     
     &:after {
         bottom: 100%;
-        left: 7%;
+        left: 20px;
         border: solid transparent;
         content: " ";
         height: 0;
         width: 0;
         position: absolute;
         pointer-events: none;
-        border-bottom-color: $green;
+        border-bottom-color: $gray;
         border-width: 10px;
         margin-left: -10px;
     }

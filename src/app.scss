@@ -7,9 +7,16 @@ body {
 }  
 body {
 	background: rgb(9,76,114);
-	background: -webkit-radial-gradient(bottom, ellipse cover,  rgb(9,76,114) 0%,rgb(1,41,63) 100%);
 	background: -webkit-radial-gradient(ellipse at bottom, rgb(9,76,114) 0%, rgb(1,41,63) 100%);
-	background: -webkit-radial-gradient(bottom, ellipse, rgb(9,76,114) 0%, rgb(1,41,63) 100%);
 	background: radial-gradient(ellipse at bottom,  rgb(9,76,114) 0%,rgb(1,41,63) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#094c72', endColorstr='#01293f',GradientType=1 );
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chatpage {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }

@@ -14,15 +14,15 @@ const Message = (props) => {
                 {props.message.text}
                 {props.message.file &&
                     <span>
-                        <br/>
+                        {props.message.text && <br/>}                        
                         {props.message.file.mimetype.indexOf('image',0) == 0 ?
                             <img 
                                 className="message-image" 
                                 src={`http://localhost:4001/api/image/${props.message.file.filename}/${props.message.file.size}/${props.message.file.mimetype}`}
                             /> 
-                        :   
+                        :
                             <a href={`http://localhost:4001/api/image/${props.message.file.filename}/${props.message.file.size}/${props.message.file.mimetype}`}>
-                                {props.message.file.originalname}
+                                <i className="fas fa-file-alt"></i> {props.message.file.originalname}
                             </a>
                         }
                     </span>

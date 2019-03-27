@@ -2,9 +2,11 @@
 @import url(https://use.fontawesome.com/releases/v5.8.1/css/all.css);
 
 $green: #86BB71;
-$blue: #94C2ED;
-$orange: #E38968;
+$blue: #0066cc;
+$orange: #e65c00;
 $gray: #92959E;
+$red: #b30000;
+$silver: #F2F5F8;
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -14,66 +16,19 @@ ul {
     list-style: none;
 }
 
+a {
+  color: lighten($orange, 30%);
+}
+
 .container-chat {
   margin: 0 auto;
   width: 90%;
-  height: 95%;
-  background: #41434b;
+  height: 85vh;
+  background: #444753;
   border-radius: 5px;
   display: flex;
-}
-
-.people-list {
-  width:20%;
-  float: left;
-  
-  .search {
-    padding: 20px;
-  }
-  
-  input {
-    border-radius: 3px;
-    border: none;
-    padding: 14px;
-    color: white;
-    background: #6A6C75;
-    width: 90%;
-    font-size: 14px;
-  }
-  
-  .fa-search {
-    position: relative;
-    left: -25px;
-  }
-  
-  ul {
-    padding: 20px;
-    height: 770px;
-    
-    
-    
-    li {
-      padding-bottom: 20px;
-    }
-  }
-  
-  img {
-    float: left;
-  }
-  
-  .about {
-    float: left;
-    margin-top: 8px;
-  }
-  
-  .about {
-    padding-left: 8px;
-  }
-  
-  .status {
-    color: $gray;
-  }
-  
+  flex-direction: row;
+  justify-content: center;
 }
 
 .chat {
@@ -89,6 +44,7 @@ ul {
   
   .chat-message {
     padding: 30px;
+    height: 15%;
     
     textarea {
       width: 100%;
@@ -101,17 +57,10 @@ ul {
       
     }
     
-    .fa-file-o, .fa-file-image-o {
-      font-size: 16px;
-      color: gray;
-      cursor: pointer;
-      
-    }
-    
     button {
       float: right;
-      color: $blue;
-      font-size: 16px;
+      color: $orange;
+      font-size: 1.3em;
       text-transform: uppercase;
       border: none;
       cursor: pointer;
@@ -119,7 +68,7 @@ ul {
       background: #F2F5F8;
       
       &:hover {
-        color: darken($blue, 7%);
+        color: darken($orange, 7%);
       }
     }
   }
