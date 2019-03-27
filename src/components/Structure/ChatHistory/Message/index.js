@@ -5,11 +5,12 @@ const Message = (props) => {
     const isMine = props.message.senderName == props.userName;
     return (
         <li className={isMine ? 'clearfix' : ''}>
-            <div className={isMine ? 'message-data align-right' : 'message-data'}>
-                <span className="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-                <span className="message-data-name" >{isMine ? '' : props.message.senderName}</span>
-            </div>
-            <div className={isMine ? 'message other-message float-right' : 'message my-message'}>
+            {!isMine &&
+                <div className={'message-data'}>
+                    <span className="message-data-name" >{props.message.senderName}</span>
+                </div>
+            }
+            <div className={isMine ? 'message my-message float-right' : 'message other-message'}>
                 {props.message.text}
                 {props.message.file &&
                     <span>

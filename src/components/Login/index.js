@@ -8,12 +8,17 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.submitLogin = this.submitLogin.bind(this);
-        this.enterLogin = this.enterLogin.bind(this);
-        this.addUser = this.addUser.bind(this);
+        this.handleUserLogin = this.handleUserLogin.bind(this);
         this.initializeSession = this.initializeSession.bind(this);
         this.state = { 
             loginSuccesfull: false
         };
+        this.props.socket.on('status', (data) =>{
+            console.log(data);
+        });
+        this.props.socket.on('success-login', (userName) =>{
+            this.initializeSession(userName);
+        });
     }
 
     initializeSession(userName) {
@@ -24,42 +29,14 @@ class Login extends React.Component {
         this.setState({ loginSuccesfull:true });
     }
 
-    addUser(userName) {
-        axios.post('http://localhost:4001/api/user/', {
-            userName: userName
-        })
-        .then(function (response) {
-            console.log('entrou no then do addUser');
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
-
-    enterLogin(component, userName) {
-        axios.get(`http://localhost:4001/api/user/${userName}`, {
-            headers: { 'Access-Control-Allow-Origin': true },
-        })
-        .then(function (response) {
-            if (response.data) {
-                component.initializeSession(userName);
-            } else {
-                component.addUser(userName);
-                component.initializeSession(userName);
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            
-        });
-    }
-
     submitLogin(event) {
         event.preventDefault();
         const userName = event.target.userName.value;        
-        this.enterLogin(this, userName);
+        this.handleUserLogin(userName);
+    }
+
+    handleUserLogin(userName) {
+        this.props.socket.emit('user-login', userName);
     }
 
     render() { 

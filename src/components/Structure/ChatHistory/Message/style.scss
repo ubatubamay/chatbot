@@ -12,9 +12,23 @@ $gray: #92959E;
     font-size: 16px;
     border-radius: 7px;
     margin-bottom: 30px;
-    width: 90%;
+    min-width: 5px;
+    max-width: 90%;
     position: relative;
+}
 
+.message-data {
+    margin-bottom: 15px;
+}
+
+.message-data-time {
+    color: lighten($gray, 8%);
+    padding-left: 6px;
+}
+
+.other-message {
+    background: $green;
+    
     &:after {
         bottom: 100%;
         left: 7%;
@@ -30,26 +44,9 @@ $gray: #92959E;
     }
 }
 
-.message-data {
-    margin-bottom: 15px;
-}
-
-.message-data-time {
-    color: lighten($gray, 8%);
-    padding-left: 6px;
-}
-
 .my-message {
-    background: $green;
-}
-
-.other-message {
     background: $blue;
-
-    &:after {
-        border-bottom-color: $blue;
-        left: 93%;
-    }
+    text-align: right;
 }
 
 .message-image {
@@ -62,4 +59,8 @@ $gray: #92959E;
 
 .float-right {
     float: right;
+}
+
+.float-left {
+    float: left;
 }

@@ -44,7 +44,7 @@ class Presentation extends React.Component {
                 {this.state.isLogged ? (
                     <Structure userName={this.state.userName} socket={this.props.socket}/>
                 ) : (
-                    <Login handleLogin={this.handleLogin} />
+                    <Login handleLogin={this.handleLogin} socket={this.props.socket}/>
                 )}
             </div>
         );

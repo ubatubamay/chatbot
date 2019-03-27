@@ -10,36 +10,29 @@ class Structure extends React.Component {
     constructor(props) {
         super(props);
         this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
-        this.callOldMessages = this.callOldMessages.bind(this);
         this.storeNewUserMessage = this.storeNewUserMessage.bind(this);
         this.saveMessageOnServer = this.saveMessageOnServer.bind(this);
         this.state = {
             messages: Array(),
-            endpoint: "localhost:4001",
             socketUserID: this.props.socket.id,
             file: null,
         };
-        this.props.socket.on('message-received', (message) => {
+        this.props.socket.emit('message-history-call');
+        this.props.socket.on('message-history-receipt', (data) => {
+            this.setState({messages:data});
+        });
+        this.props.socket.on('message-receipt', (message) => {
             this.newMessageReceived(message);
         });
-        this.callOldMessages(this);
     }
 
-    callOldMessages(component) {
-        axios.get(`http://localhost:4001/api/message/`, {
-            headers: { 'Access-Control-Allow-Origin': true },
-        })
-        .then(function (response) {
-            if (response.data) {
-                component.setState({messages:response.data});
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            
-        });
+    handleMessageSubmit (event) {
+        event.preventDefault();
+        const messageInput = event.target.message.value;
+        if (messageInput.trim() || this.state.file) {
+            this.storeNewUserMessage(this, messageInput);
+        }
+        event.target.message.value = '';
     }
 
     storeNewUserMessage(component, userInput) {
@@ -62,49 +55,26 @@ class Structure extends React.Component {
                 console.log(response);
                 message.file = response.data;
                 component.saveMessageOnServer(component, message);
-                //component.setState({file:null});
+                component.setState({file:null});
             })
             .catch(function (error){
                 console.log(error);
             });
         } else {
-            this.saveMessageOnServer(this, message);
+            this.saveMessageOnServer(message);
         }
         
     }
 
-    saveMessageOnServer(component, message) {
-        axios.post('http://localhost:4001/api/message/', {
-            message: message
-        })
-        .then(function (response) {
-            component.props.socket.emit('send-public-message', message);
-            const copyMessages = Object.assign([], component.state.messages);
-            copyMessages.push(message);
-            component.setState({messages:copyMessages});
-            return message;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
-
-    handleMessageSubmit (event) {
-        event.preventDefault();
-        const messageInput = event.target.message.value;
-        if (messageInput.trim() || this.state.file) {
-            this.storeNewUserMessage(this, messageInput);
-        }
-        event.target.message.value = '';
+    saveMessageOnServer(message) {
+        this.props.socket.emit('save-message', message);
     }
 
     newMessageReceived(message) {
-        if (message.senderName != this.props.userName){
-            const copyMessages = Object.assign([], this.state.messages);
-            copyMessages.push(message);
-            this.setState({messages:copyMessages});
-            return message;
-        }
+        const copyMessages = Object.assign([], this.state.messages);
+        copyMessages.push(message);
+        this.setState({messages:copyMessages});
+        return message;
     }
 
     onChooseFile(e) {      
@@ -118,7 +88,6 @@ class Structure extends React.Component {
                 <div className="people-list" id="people-list">
                     <div className="search">
                         Logged as {this.props.userName}
-                        <i className="fa fa-search"></i>
                     </div>
                     <ul className="list">
                         <li className="clearfix">
