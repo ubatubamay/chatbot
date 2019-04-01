@@ -1,0 +1,36 @@
+$green: #86BB71;
+$blue: #0066cc;
+$orange: #e65c00;
+$gray: #92959E;
+$red: #b30000;
+$silver: #F2F5F8;
+
+.chat-message {
+    padding: 30px;
+    height: 15%;
+    
+    textarea {
+        width: 100%;
+        border: none;
+        padding: 10px 20px;
+        font: 14px/22px "Lato", Arial, sans-serif;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        resize: none;
+    }
+    
+    button {
+        float: right;
+        color: $orange;
+        font-size: 1.3em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        background: #F2F5F8;
+        
+        &:hover {
+            color: darken($orange, 7%);
+        }
+    }
+}

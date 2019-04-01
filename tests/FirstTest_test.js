@@ -5,10 +5,11 @@ const axios = require('axios');
 const message = faker.random.words();
 const olderUserNickname = 'rihanna';
 const newUserNickname = faker.name.firstName();
-const fileName = 'README.md';
+const pathFakerFiles = './tests/faker-files/';
+const fileName = 'doc.txt';
 const imageName = 'cancel.png';
 
-Feature('FirstTest');
+Feature('UI Test');
 
 Before(() => {
     axios({
@@ -21,30 +22,13 @@ Before(() => {
     .catch((error)=>{
         console.log('MESSAGE COLLECTION DIRTY')
     })
-    pause();
 });
 
-Scenario.only('received messages', (I) => {
-    I.amOnPage('http://localhost:8080');
-    within('.login', () => {
-        I.fillField('userName', newUserNickname);
-    });
-    I.click('button');
-    session(olderUserNickname, () => {
-        I.amOnPage('http://localhost:8080');
-        within('.login', () => {
-            I.fillField('userName', olderUserNickname);
-        });
-        I.click('button');
-    });
-    within('.chat-message', () => {
-        I.fillField('Type your message', 'Hello '+olderUserNickname);
-        I.click("btn-send");
-    });
-    session(olderUserNickname, () => {
-      I.see('Hello '+olderUserNickname);
-    });
-});
+// After(() => {
+//     pause();
+// });
+
+
 
 Scenario('new user login', (I) => {
     I.amOnPage('http://localhost:8080');
@@ -103,7 +87,7 @@ Scenario('new image message', (I) => {
     });
     I.click('button');
     within('.chat-message', () => {
-        I.attachFile("input[type='file']", imageName);
+        I.attachFile("input[type='file']", pathFakerFiles+imageName);
         I.click('button');
     });
 });
@@ -115,12 +99,51 @@ Scenario('new file message', (I) => {
     });
     I.click('button');
     within('.chat-message', () => {
-        I.attachFile("input[type='file']", fileName);
+        I.attachFile("input[type='file']", pathFakerFiles+fileName);
         I.click('button');
+    });
+    I.see(fileName);
+});
+
+Scenario('new mix message', (I) => {
+    I.amOnPage('http://localhost:8080');
+    within('.login', () => {
+        I.fillField('userName', olderUserNickname);
+    });
+    I.click('button');
+
+    within('.chat-message', () => {
+        I.fillField('Type your message', message);
+        I.attachFile("input[type='file']", pathFakerFiles+fileName);
+        I.click('button');
+    });
+    I.see(message);
+    I.see(fileName);
+});
+
+Scenario('received messages', (I) => {
+    I.amOnPage('http://localhost:8080');
+    within('.login', () => {
+        I.fillField('userName', newUserNickname);
+    });
+    I.click('button');
+    session(olderUserNickname, () => {
+        I.amOnPage('http://localhost:8080');
+        within('.login', () => {
+            I.fillField('userName', olderUserNickname);
+        });
+        I.click('button');
+    });
+    within('.chat-message', () => {
+        I.fillField('Type your message', 'Hello '+olderUserNickname);
+        I.click("btn-send");
+    });
+    session(olderUserNickname, () => {
+      I.see('Hello '+olderUserNickname);
     });
 });
 
-Scenario('new mix message', async (I) => {
+Scenario('counter message', async (I) => {
     I.amOnPage('http://localhost:8080');
     within('.login', () => {
         I.fillField('userName', olderUserNickname);
@@ -129,16 +152,12 @@ Scenario('new mix message', async (I) => {
 
     const html = await I.grabHTMLFrom('.chat-num-messages');
     const messagesCountText = html.split(' ');
-    console.log(messagesCountText[1]);
 
     within('.chat-message', () => {
-        I.fillField('Type your message', message);
-        I.attachFile("input[type='file']", fileName);
-        I.click('button');
-    });
 
+        I.fillField('Type your message', message);
+        I.click("btn-send");
+    });
     const newMessageCount = parseInt(messagesCountText[1]) + 1;
-    console.log(newMessageCount);
     I.see('already '+newMessageCount+' messages');
-    
 });

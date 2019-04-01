@@ -6,17 +6,18 @@ import './style.scss';
 import ChatPeopleList from './ChatPeopleList';
 import ChatHistory from './ChatHistory';
 import ChatHeader from './ChatHeader';
+import ChatSender from './ChatSender';
 
-class Structure extends React.Component {
+class Chat extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
         this.storeNewUserMessage = this.storeNewUserMessage.bind(this);
         this.saveMessageOnServer = this.saveMessageOnServer.bind(this);
+        this.onChooseFile = this.onChooseFile.bind(this);
         this.state = {
             messages: Array(),
-            socketUserID: this.props.socket.id,
             file: null,
         };
         this.props.socket.emit('message-history-call');
@@ -89,23 +90,10 @@ class Structure extends React.Component {
             <div className="container-chat clearfix">
                 <ChatPeopleList closeSession={this.props.handleLogout} userName={this.props.userName}/>
                 
-                <div className="chat">
-                
+                <div className="chat">                
                     <ChatHeader messageQuantity={this.state.messages.length}/>
                     <ChatHistory messages={this.state.messages} userName={this.props.userName}/>
-
-                    <div className="chat-message clearfix">
-                        <form onSubmit={this.handleMessageSubmit}>
-                            <textarea name="message" id="message-to-send" placeholder ="Type your message" rows="1"></textarea>
-                                
-                            <input type="file" name="file" encType="multipart/form-data" onChange={(e)=>this.onChooseFile(e)}></input>
-
-                            <button type="submit" name="btn-send">
-                                <i className="fas fa-paper-plane"> SEND</i>
-                            </button>                            
-                        </form>
-                    </div>
-                
+                    <ChatSender handleMessage={this.handleMessageSubmit} chooseFile={this.onChooseFile}/>                
                 </div>
                 
             </div>
@@ -114,4 +102,4 @@ class Structure extends React.Component {
     }
 }
 
-export default Structure;
+export default Chat;

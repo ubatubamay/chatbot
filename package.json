@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint . ",
     "build": "webpack",
-    "watch": "webpack-dev-server --inline --hot"
+    "watch": "webpack-dev-server --inline --hot",
+    "test": "npx codeceptjs run --steps"
   },
   "keywords": [],
   "author": "",

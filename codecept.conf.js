@@ -1,16 +1,16 @@
 exports.config = {
-  tests: './*_test.js',
-  output: './output',
+  tests: './tests/*_test.js',
+  output: './tests/output',
   helpers: {
     Puppeteer: {
       url: 'http://localhost',
       show: true,
       waitForAction: 1000,
-      windowSize: '1920x1080',
+      windowSize: '925x900',
       chrome: {
         defaultViewport: {
-          width: 1920,
-          height: 1080
+          width: 925,
+          height: 900
         },
         handleSIGINT: false,
       },

@@ -1,10 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
 $gray: #92959E;
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
 
 .chat-header {
     padding: 20px;
@@ -19,7 +13,7 @@ $gray: #92959E;
     
     .chat-with {
         font-weight: bold;
-        font-size: 16px;
+        font-size: 1em;
     }
     
     .chat-num-messages {

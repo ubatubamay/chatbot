@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
 $green: #86BB71;
 $blue: #0066cc;
 $orange: #e65c00;
@@ -8,26 +6,16 @@ $red: #b30000;
 $silver: #F2F5F8;
 
 .container {
-  margin: 0 auto;
-  width: 90%;
-  height: 85vh;
-  background: #444753;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  -webkit-animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-  animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-.short-out {
-    -webkit-animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) reverse forwards;
-    animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) reverse forwards;
-}
-
-.fade-out {
-	-webkit-animation: fade-out 0.3s ease-out both;
-	animation: fade-out 0.3s ease-out both;
+    margin: 0 auto;
+    width: 90%;
+    height: 85vh;
+    background: #444753;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 .login {
@@ -40,20 +28,18 @@ $silver: #F2F5F8;
     }
 
     input {
-        width: 360px;
+        width: 80%;
 		background: #fff;
-		color: #a3a3a3;
-		font: inherit;
-		box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+		color: $gray;
+		font-size: inherit;
 		border: 0;
-		outline: 0;
-		padding: 22px 18px;
+        padding: 22px 18px;
+        caret-color: $orange;
     }
 
     .btn {
         display: inline-block;
         background: transparent;
-        color: inherit;
         font: inherit;
         border: 0;
         outline: 0;
@@ -64,10 +50,10 @@ $silver: #F2F5F8;
         &--primary {
             background: $orange;
             color: #fff;
-            box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
             border-radius: 2px;
             padding: 12px 36px;
-            
+            font-size: 1em;
+
             &:hover {
                 background: darken($orange, 4%);
             }
@@ -84,6 +70,11 @@ $silver: #F2F5F8;
     }
 }
 
+.go-out {
+    -webkit-animation: go-out 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) reverse forwards;
+    animation: go-out 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) reverse forwards;
+}
+
 
 @-webkit-keyframes fade-in {
     0% { opacity: 0; }
@@ -95,41 +86,31 @@ $silver: #F2F5F8;
 }
 
 
-@-webkit-keyframes fade-out {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-@keyframes fade-out {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-
-@-webkit-keyframes scale-up-hor-left {
+@-webkit-keyframes go-out {
     0% {
-      -webkit-transform: scaleX(0.2);
-              transform: scaleX(0.2);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
+        -webkit-transform: scaleX(0.2);
+        transform: scaleX(0.2);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
     }
     100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
     }
 }
-@keyframes scale-up-hor-left {
+@keyframes go-out {
     0% {
-      -webkit-transform: scaleX(0.2);
-              transform: scaleX(0.2);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
+        -webkit-transform: scaleX(0.2);
+        transform: scaleX(0.2);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
     }
     100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
     }
 }
